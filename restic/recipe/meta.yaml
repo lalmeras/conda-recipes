@@ -1,0 +1,33 @@
+{% set name = "restic" %}
+{% set version = "0.8.3" %}
+{% set build_number = "0" %}
+{% set sha256 = "1e9aca80c4f4e263c72a83d4333a9dac0e24b24e1fe11a8dc1d9b38d77883705" %}
+{% set license_sha256 = "6f08a01a9fab5b24e139a09f15cc24a73087c7bc09e3bacf099fdf2d767bf897" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+  arch: x86_64
+  platform: linux-64
+
+source:
+  - url: https://github.com/restic/restic/releases/download/v{{ version }}/restic_{{ version }}_linux_amd64.bz2
+    sha256: {{ sha256 }}
+    fn: restic.bz2
+  - url: https://github.com/restic/restic/raw/master/LICENSE
+    sha256: {{ license_sha256 }}
+
+build:
+  binary_relocation: false
+  number: {{ build_number }}
+
+test:
+  commands:
+    - restic version
+
+about:
+  home: https://restic.net/
+  license: BSD 2-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: restic is a program that does backups right.
